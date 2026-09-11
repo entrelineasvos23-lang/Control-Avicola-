@@ -1,0 +1,34 @@
+name: Preparar proyecto
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  preparar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar proyecto
+        uses: actions/checkout@v4
+
+      - name: Descomprimir proyecto
+        run: |
+          if [ -f ControlAvicola_proyecto_mejorado.zip ]; then
+            unzip -o ControlAvicola_proyecto_mejorado.zip
+            if [ -d ControlAvicola_proyecto_mejorado ]; then
+              cp -r ControlAvicola_proyecto_mejorado/. .
+              rm -rf ControlAvicola_proyecto_mejorado
+            fi
+            rm ControlAvicola_proyecto_mejorado.zip
+          fi
+
+      - name: Guardar proyecto
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "Preparar proyecto Control Avicola"
+          git push
