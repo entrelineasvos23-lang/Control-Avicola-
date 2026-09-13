@@ -25,7 +25,8 @@ jobs:
           gradle-version: "8.9"
 
       - name: Extraer proyecto
-        run: run: gradle assembleDebug -Pkotlin.jvm.target.validation.mode=warning
+        run: run: mkdir proyecto
+    unzip -q ControlAvicola_proyecto_mejorado.zip -d proyectogradle assembleDebug -Pkotlin.jvm.target.validation.mode=warning
           mkdir proyecto
           unzip -q ControlAvicola_proyecto_mejorado.zip -d proyecto
 
